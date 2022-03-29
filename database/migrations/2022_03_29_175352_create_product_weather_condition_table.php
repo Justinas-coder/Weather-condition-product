@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('product_weather_condition', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id');
-            $table->foreignId('weather_id');
+            $table->foreignId('weather_condition_id');
             $table->timestamps();
         });
     }
