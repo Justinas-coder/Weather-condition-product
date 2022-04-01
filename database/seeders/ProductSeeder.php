@@ -18,23 +18,24 @@ class ProductSeeder extends Seeder
     public function run()
     {
         DB::table('products')->insert([
-            ['name' => 'Sun Glasses', 'sku' => 'ML-13', 'price' => '94.76'],
-            ['name' => 'Shorts', 'sku' => 'ML-16', 'price' => '9.76'],
-            ['name' => 'Baseball Head', 'sku' => 'RL-16', 'price' => '19.76'],
-            ['name' => 'Wind Breaker', 'sku' => 'WL-14', 'price' => '191.76'],
-            ['name' => 'Jacket', 'sku' => 'JL-16', 'price' => '111.76'],
-            ['name' => 'Boots', 'sku' => 'BL-11', 'price' => '133.76'],
-            ['name' => 'Rain Coat', 'sku' => 'RL-14', 'price' => '191.76'],
-            ['name' => 'Spoked Boots', 'sku' => 'RET-14', 'price' => '191.76'],
-            ['name' => 'Synergistic Leather Hat', 'sku' => 'UM-13', 'price' => '91.76'],
-            ['name' => 'Pink Hat', 'sku' => 'UM-1', 'price' => '12.76'],
-            ['name' => 'Jacket', 'sku' => 'JL-16', 'price' => '111.76'],
-            ['name' => 'Boots', 'sku' => 'BL-11', 'price' => '133.76'],
-            ['name' => 'Rain Coat', 'sku' => 'RL-14', 'price' => '191.76'],
-            ['name' => 'Spoked Boots', 'sku' => 'RET-14', 'price' => '191.76'],
-            ['name' => 'Synergistic Leather Hat', 'sku' => 'UM-13', 'price' => '91.76'],
-            ['name' => 'Pink Hat', 'sku' => 'UM-1', 'price' => '12.76']
+            ['product_name' => 'Sun Glasses', 'sku' => 'ML-13', 'price' => '94.76'],
+            ['product_name' => 'Shorts', 'sku' => 'ML-16', 'price' => '9.76'],
+            ['product_name' => 'Baseball Head', 'sku' => 'RL-16', 'price' => '19.76'],
+            ['product_name' => 'Wind Breaker', 'sku' => 'WL-14', 'price' => '191.76'],
+            ['product_name' => 'Jacket', 'sku' => 'JL-16', 'price' => '111.76'],
+            ['product_name' => 'Boots', 'sku' => 'BL-11', 'price' => '133.76'],
+            ['product_name' => 'Rain Coat', 'sku' => 'RL-14', 'price' => '191.76'],
+            ['product_name' => 'Spoked Boots', 'sku' => 'RET-14', 'price' => '191.76'],
+            ['product_name' => 'Synergistic Leather Hat', 'sku' => 'UM-13', 'price' => '91.76'],
+            ['product_name' => 'Pink Hat', 'sku' => 'UM-1', 'price' => '12.76'],
+            ['product_name' => 'Jacket', 'sku' => 'JL-16', 'price' => '111.76'],
+            ['product_name' => 'Boots', 'sku' => 'BL-11', 'price' => '133.76'],
+            ['product_name' => 'Rain Coat', 'sku' => 'RL-14', 'price' => '191.76'],
+            ['product_name' => 'Spoked Boots', 'sku' => 'RET-14', 'price' => '191.76'],
+            ['product_name' => 'Synergistic Leather Hat', 'sku' => 'UM-13', 'price' => '91.76'],
+            ['product_name' => 'Pink Hat', 'sku' => 'UM-1', 'price' => '12.76']
         ]);
+
     }
 
 //    {
