@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\WeatherConditionResource;
 use App\Models\Product;
 use App\Models\WeatherCondition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -26,19 +28,33 @@ class ProductController extends Controller
 
     public function product_recommend(Request $request)
     {
+        $city = $request->city;
+
         $response = Http::get('https://api.meteo.lt/v1/places/'.$request->city.'/forecasts/long-term');
 
-        $weather_collection = collect($response->json()['forecastTimestamps']);
+        $weatherCollection = collect($response->json()['forecastTimestamps']);
+
+        $todayDate = Carbon::now()->startOfDay();
+
+        $endDate = Carbon::now()->addDays(3)->endOfDay();
+
+        $currentTime = Carbon::now('UTC')
+            ->format('H:00:00');
+
+        $weatherBetweenPeriod = $weatherCollection
+            ->filter(function ($value, $key) use ($todayDate, $endDate, $currentTime) {
+
+                return $value['forecastTimeUtc'] >= $todayDate &&  $value['forecastTimeUtc'] <= $endDate && strpos($value['forecastTimeUtc'], $currentTime);;
+            });
 
 
-        $today_date = Carbon::now()
-            ->format('Y-m-d 12:00:00');
+        dd($weatherBetweenPeriod);
 
-        $tomorrow_date = Carbon::now()->addDays(1)
-            ->format('Y-m-d 12:00:00');
 
-        $after_tomorrow_date = Carbon::now()->addDays(2)
-            ->format('Y-m-d 12:00:00');
+
+
+
+
 
         $today_weather_condition = $weather_collection->whereIn('forecastTimeUtc', [$today_date])->first()['conditionCode'];
 
@@ -61,9 +77,14 @@ class ProductController extends Controller
         $queried_products_after_tomorrow = WeatherCondition::with('products')->whereIn('id', [$after_tomorrow_weather_condition_id])->get();
 
 
+        $data = collect([
+            $queried_products_today,
+            $queried_products_tomorrow,
+            $queried_products_after_tomorrow
+        ]);
 
+        return WeatherConditionResource::collection($queried_products_today);
 
-        return [$queried_products_tomorrow, $queried_products_tomorrow, $queried_products_after_tomorrow];
     }
 
     /**
