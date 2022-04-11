@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use App\Http\Resources\OutputResource;
 
 class ProductController extends Controller
 {
@@ -28,7 +29,6 @@ class ProductController extends Controller
 
     public function product_recommend(Request $request)
     {
-        $city = $request->city;
 
         $response = Http::get('https://api.meteo.lt/v1/places/'.$request->city.'/forecasts/long-term');
 
@@ -36,54 +36,28 @@ class ProductController extends Controller
 
         $todayDate = Carbon::now()->startOfDay();
 
-        $endDate = Carbon::now()->addDays(3)->endOfDay();
+        $endDate = Carbon::now()->addDays(2)->endOfDay();
 
         $currentTime = Carbon::now('UTC')
             ->format('H:00:00');
 
-        $weatherBetweenPeriod = $weatherCollection
+        $weatherConditions = $weatherCollection
             ->filter(function ($value, $key) use ($todayDate, $endDate, $currentTime) {
 
-                return $value['forecastTimeUtc'] >= $todayDate &&  $value['forecastTimeUtc'] <= $endDate && strpos($value['forecastTimeUtc'], $currentTime);;
-            });
-
-
-        dd($weatherBetweenPeriod);
+                return $value['forecastTimeUtc'] >= $todayDate &&  $value['forecastTimeUtc'] < $endDate && strpos($value['forecastTimeUtc'], $currentTime);
+            })->sortBy('forecastTimeUtc');
 
 
 
+            $output = [
+                'city' => $request->city,
+                'recomendations' => $weatherConditions,
+            ];
 
 
 
+            return new OutputResource($output);
 
-        $today_weather_condition = $weather_collection->whereIn('forecastTimeUtc', [$today_date])->first()['conditionCode'];
-
-        $tomorrow_weather_condition = $weather_collection->whereIn('forecastTimeUtc', [$tomorrow_date])->first()['conditionCode'];
-
-        $after_tomorrow_weather_condition = $weather_collection->whereIn('forecastTimeUtc', [$after_tomorrow_date])->first()['conditionCode'];
-
-
-        $today_weather_condition_id = WeatherCondition::all()->whereIn('condition', [$today_weather_condition])->first()['id'];
-
-        $tomorrow_weather_condition_id = WeatherCondition::all()->whereIn('condition', [$tomorrow_weather_condition])->first()['id'];
-
-        $after_tomorrow_weather_condition_id = WeatherCondition::all()->whereIn('condition', [$after_tomorrow_weather_condition])->first()['id'];
-
-
-        $queried_products_today = WeatherCondition::with('products')->whereIn('id', [$today_weather_condition_id])->get();
-
-        $queried_products_tomorrow = WeatherCondition::with('products')->whereIn('id', [$tomorrow_weather_condition_id])->get();
-
-        $queried_products_after_tomorrow = WeatherCondition::with('products')->whereIn('id', [$after_tomorrow_weather_condition_id])->get();
-
-
-        $data = collect([
-            $queried_products_today,
-            $queried_products_tomorrow,
-            $queried_products_after_tomorrow
-        ]);
-
-        return WeatherConditionResource::collection($queried_products_today);
 
     }
 
