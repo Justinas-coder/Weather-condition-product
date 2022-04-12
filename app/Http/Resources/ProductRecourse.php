@@ -17,8 +17,8 @@ class ProductRecourse extends JsonResource
     {
         return [
             'sku' => $this['sku'],
-            'name' => $this['productName'],
-            'price' => $this['productPrice'],
+            'name' => $this['product_name'],
+            'price' => $this['price'],
         ];
     }
 }
