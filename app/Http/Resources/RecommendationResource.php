@@ -7,7 +7,7 @@ use App\Http\Resources\ProductRecourse;
 use Illuminate\Support\Carbon;
 use App\Models\Product;
 
-class RecomendationResource extends JsonResource
+class RecommendationResource extends JsonResource
 {
     public $collects = [];
     /**

@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\RecomendationResource;
+use App\Http\Resources\RecommendationResource;
 
 class OutputResource extends JsonResource
 {
@@ -18,7 +18,7 @@ class OutputResource extends JsonResource
 
         return [
             'city' => $this['city'],
-            'recomendations' => RecomendationResource::collection($this['recomendations'])
+            'recommendations' => RecommendationResource::collection(resource: $this['recommendations'])
         ];
     }
 }
