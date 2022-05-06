@@ -10,7 +10,7 @@ Build:
 
 1 - Set up Docker service in your machine >> see  manuals link: https://docs.docker.com/
 
-2 - Clone repository link: "git@github.com:Justinas-coder/Weather-condition-product.git"
+2 - Clone repository link: "git clone git@github.com:Justinas-coder/Weather-condition-product.git"
 
 3 -  Create .env file by running Cml command: "cp .env.example .env"
 
@@ -34,7 +34,8 @@ Creating weather-condition_laravel.test_1 ... done
 
 5 - Use "$sail php artisan db:seed "in Cml, and seed database tables
 
-Know launch web browser with url link: http://localhost/api/products/recommendation/vilnius,
+
+Launch web browser with url link: http://localhost/api/products/recommendation/vilnius,
 
 endpoint of url can be all Lithuanian main cities.
 
