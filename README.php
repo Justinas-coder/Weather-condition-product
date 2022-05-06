@@ -5,13 +5,18 @@ Stack:
 - Laravel 9.x
 
 
+
 Build:
 
 1 - Set up Docker service in your machine >> see  manuals link: https://docs.docker.com/
 
-2 - Clone repository link >> git@github.com:Justinas-coder/Weather-condition-product.git
+2 - Clone repository link: "git@github.com:Justinas-coder/Weather-condition-product.git"
 
-3 - Use $docker-compose up -d command in Cml.
+3 -  Create .env file by running Cml command: "cp .env.example .env"
+
+4 - Install PHP dependencies: composer install
+
+5 - Use "$sail up -d" command in Cml.
 
 When we run this, we should see output like this:
 
@@ -25,11 +30,11 @@ Creating weather-condition_mailhog_1     ... done
 Creating weather-condition_redis_1       ... done
 Creating weather-condition_laravel.test_1 ... done
 
-4 - Use $sail php artisan make:migration in Cml, and make database migrations
+4 - Use "$sail php artisan migration" in Cml, and make database migrations
 
-5 - Use $sail php artisan db:seed in Cml, and seed database tables
+5 - Use "$sail php artisan db:seed "in Cml, and seed database tables
 
-Know launch web browser with url >> http://localhost/api/products/recommendation/vilnius,
+Know launch web browser with url link: http://localhost/api/products/recommendation/vilnius,
 
 endpoint of url can be all Lithuanian main cities.
 
