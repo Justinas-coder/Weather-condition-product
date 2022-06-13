@@ -1,18 +1,17 @@
 ### Application do:
 
 depending on the city name in endpoint of url,
-For the next 3 days depending on the forecast application returns
+for next 3 days depending on the forecast application returns
 2 items that would match the weather forecast.
-For forecast data was useed (external LHMT API: https://api.meteo.lt/).
-Application returns Json format.
+For forecast data api use (external LHMT API: https://api.meteo.lt/).
 
+Application returns Json format.
 
 ### Stack:
 
 - PHP 8.1.4
 - Docker version 20.10.14
 - Laravel 9.x
-
 
 ### How to launch it:
 
