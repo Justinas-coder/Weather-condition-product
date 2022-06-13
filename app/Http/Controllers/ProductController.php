@@ -50,17 +50,12 @@ class ProductController extends Controller
                 return $value['forecastTimeUtc'] >= $todayDate &&  $value['forecastTimeUtc'] < $endDate && strpos($value['forecastTimeUtc'], $currentTime);
             })->sortBy('forecastTimeUtc');
 
-
-
             $output = [
                 'city' => $request->city,
                 'recommendations' => $weatherConditions,
             ];
 
-
-
             return new OutputResource($output);
-
 
     }
 
