@@ -12,6 +12,7 @@ Application returns Json format.
 - PHP 8.1.4
 - Docker version 20.10.14
 - Laravel 9.x
+- Postman
 
 ### How to launch it:
 
@@ -19,24 +20,26 @@ Application returns Json format.
 
 2. Clone this repo
 ```
-   git clone https://github.com/Justinas-coder/Weather-condition-product
+git clone https://github.com/Justinas-coder/Weather-condition-product
 ```
-3. Create .env file
+
+3Install PHP dependencies (reference: https://laravel.com/docs/9.x/sail#installing-composer-dependencies-for-existing-projects)
 ```
-   cp .env.example .env
+ docker run --rm \
+ -u "$(id -u):$(id -g)" \
+ -v $(pwd):/var/www/html \
+ -w /var/www/html \
+ laravelsail/php81-composer:latest \
+ composer install --ignore-platform-reqs
 ```
-4. Install PHP dependencies (reference: https://laravel.com/docs/9.x/sail#installing-composer-dependencies-for-existing-projects)
+
+4.Create .env file
 ```
-    docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v $(pwd):/var/www/html \
-    -w /var/www/html \
-    laravelsail/php81-composer:latest \
-    composer install --ignore-platform-reqs
+cp .env.example .env
 ```
 5. Start containers
 ```
-    ./vendor/bin/sail up -d
+./vendor/bin/sail up -d
 ```
 6. Generate app encryption key
 ```
