@@ -22,6 +22,7 @@ class RecommendationResource extends JsonResource
             return $query->where('condition', $this['conditionCode']);
         })->take(2)->get();
 
+
         return [
             'weather_forecast' => $this['conditionCode'],
             'date' => Carbon::parse($this['forecastTimeUtc'])->toDateString(),
